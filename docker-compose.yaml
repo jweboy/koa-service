@@ -1,0 +1,19 @@
+version: '3'
+
+networks:
+  frontend:
+  backend:
+
+services:
+  pet:
+    build:
+  mysql:
+    image: mysql:5.6
+    networks:
+      - backend
+    volumes:
+      - ~/Database/mysql:/data/db
+    environment:
+      MYSQL_ROOT_PASSWORD: jl940630
+    ports:
+      - '3306:3306'

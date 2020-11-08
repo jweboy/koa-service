@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNEXT",
+    "module": "commonjs",
+    "lib": ["ESNext"],
+    "sourceMap": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "removeComments": true,
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

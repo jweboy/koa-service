@@ -1,0 +1,60 @@
+{
+  "name": "api-service",
+  "version": "1.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/jweboy/api-service/blob/master/README.md",
+  "author": {
+    "name": "jweboy",
+    "email": "jweboy0630@gmail.com",
+    "url": "http://jweboy.com/blog"
+  },
+  "repository": "https://github.com/jweboy/api-service",
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "devDependencies": {
+    "@koa/cors": "^3.0.0",
+    "@types/dotenv-flow": "^3.0.0",
+    "@types/koa": "^2.11.1",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-compose": "^3.2.5",
+    "@types/koa-router": "^7.4.0",
+    "@types/node": "^13.7.4",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^3.1.0",
+    "prettier": "^1.15.3",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "@koa/multer": "^2.0.2",
+    "@types/qiniu": "^7.0.1",
+    "cross-env": "^7.0.0",
+    "dotenv": "^8.2.0",
+    "dotenv-flow": "^3.2.0",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compose": "^4.1.0",
+    "koa-logger": "^3.2.1",
+    "koa-multer": "^1.0.2",
+    "koa-router": "^8.0.8",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1",
+    "qiniu": "^7.3.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.22"
+  },
+  "scripts": {
+    "prettier": "prettier --write *.js",
+    "lint": "eslint --fix .",
+    "dev": "cross-env NODE_ENV=development nodemon -r dotenv/config",
+    "prod": "cross-env NODE_ENV=production nodemon",
+    "debug": "cross-env NODE_ENV=production node dist/src/app.js"
+  }
+}
