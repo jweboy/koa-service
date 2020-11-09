@@ -6,18 +6,10 @@
  */
 import 'reflect-metadata';
 import { createConnection, ConnectionOptions, Connection } from 'typeorm';
-import dotenvFlow from 'dotenv-flow';
 import Post from './post';
 import AssetsDirectory from './assets/directories';
 
-dotenvFlow.config();
-
-// const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_TABLE, DB_TYPE } = process.env;
-
-const DB_HOST = 'localhost';
-const DB_USER = 'root';
-const DB_PASSWORD = 'jl940630';
-const DB_TABLE = 'pet';
+const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_TABLE, DB_TYPE } = process.env;
 
 const options: ConnectionOptions = {
   type: 'mysql',
