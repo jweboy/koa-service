@@ -8,9 +8,9 @@ import Router from 'koa-router';
 
 const router = new Router();
 
-const testRouter = router.get('/test', (ctx) => {
+const testRouter = router.get('/test', (ctx, next) => {
   ctx.body = 'test';
-  console.log(ctx.status);
+  next();
 });
 
 export default testRouter;

@@ -52,7 +52,7 @@
   },
   "scripts": {
     "prettier": "prettier --write *.js",
-    "lint": "eslint --fix .",
+    "lint": "eslint --fix",
     "dev": "cross-env NODE_ENV=development nodemon",
     "prod": "cross-env NODE_ENV=production nodemon",
     "debug": "cross-env NODE_ENV=production node dist/src/app.js"
