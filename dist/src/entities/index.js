@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
-const dotenv_flow_1 = tslib_1.__importDefault(require("dotenv-flow"));
 const post_1 = tslib_1.__importDefault(require("./post"));
-dotenv_flow_1.default.config();
+const directories_1 = tslib_1.__importDefault(require("./assets/directories"));
+require("../utils/init-env");
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_TABLE, DB_TYPE } = process.env;
+console.log(DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_TABLE, DB_TYPE);
 const options = {
     type: 'mysql',
     host: DB_HOST,
@@ -16,7 +17,7 @@ const options = {
     database: DB_TABLE,
     synchronize: true,
     logging: ['error', 'schema'],
-    entities: [post_1.default],
+    entities: [post_1.default, directories_1.default],
 };
 class Database {
     async connect() {

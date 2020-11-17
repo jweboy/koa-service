@@ -27,8 +27,8 @@ app
 
 app.listen(PORT, async () => {
   try {
-    // await db.connect();
-    // console.log(`👏 Database connection succeeded at http://${DB_HOST}:${DB_PORT}`);
+    await db.connect();
+    console.log(`👏 Database connection succeeded at http://${DB_HOST}:${DB_PORT}`);
     console.log(`🚀 Server running at ${PROTOCOL}://${HOST}:${PORT}/api/pet`);
   } catch (err) {
     console.log('err=>', err);

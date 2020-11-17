@@ -1,19 +1,27 @@
-version: '3'
-
-networks:
-  frontend:
-  backend:
+version: '3' # 定义版本
 
 services:
-  pet:
-    build:
-  mysql:
-    image: mysql:5.6
+  app:
+    container_name: koa-service # 自定义容器名，默认格式 `项目名称_服务名称_序号`
+    build: . # 指定 Dockerfile 所在的文件夹路径，用于构建镜像
+    working_dir: /usr/local/app # 指定容器中工作目录
     networks:
-      - backend
-    volumes:
-      - ~/Database/mysql:/data/db
-    environment:
-      MYSQL_ROOT_PASSWORD: jl940630
+      - frontend # 保证和 MySQL 服务在同个共享网络状态
     ports:
-      - '3306:3306'
+      - '4001:4001' # 向外暴露的端口
+    depends_on:
+      - db # 容器相互依赖的先后顺序，service 需要等待 MySQL 启动后再连接
+  db:
+    container_name: mysql  # 自定义容器名，默认格式 `项目名称_服务名称_序号`
+    image: mysql:5.6 # 镜像文件
+    # restart: always
+    networks:
+      - frontend # 保证和 node 服务在同个共享网络状态
+    volumes:
+      - ./database:/var/lib/mysql # 数据卷挂载的路径，本地地址映射到容器内的地址
+    ports:
+      - '3306:3306' # 向外暴露的端口
+
+networks:
+  frontend: # 容器连接的网络
+    # external: true
