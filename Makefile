@@ -1,9 +1,7 @@
 commitID=$(shell git log --pretty=format:"%H" -1)
 
-# TODO: 需要根据项目实际情况替换端口号、标签名和项目名
-
-container_name=projectName
-port=4004
+container_name=api-service
+port=4001
 tag=latest
 
 build-image:

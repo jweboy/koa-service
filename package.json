@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "@koa/multer": "^2.0.2",
-    "@types/qiniu": "^7.0.1",
     "cross-env": "^7.0.0",
     "dotenv": "^8.2.0",
     "dotenv-flow": "^3.2.0",
@@ -55,6 +54,7 @@
     "lint": "eslint --fix",
     "dev": "cross-env NODE_ENV=development nodemon",
     "prod": "cross-env NODE_ENV=production nodemon",
-    "debug": "cross-env NODE_ENV=production node dist/src/app.js"
+    "debug": "cross-env NODE_ENV=development node dist/src/app.js",
+    "docker": "cross-env NODE_ENV=test node dist/src/app.js"
   }
 }
