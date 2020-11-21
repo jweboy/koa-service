@@ -2,9 +2,9 @@
  * @Author: jweboy
  * @Date: 2020-11-07 21:56:40
  * @LastEditors: jweboy
- * @LastEditTime: 2020-11-07 21:58:20
+ * @LastEditTime: 2020-11-15 12:03:05
  */
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 class AssetsDirectory {
@@ -13,6 +13,9 @@ class AssetsDirectory {
 
   @Column({ length: 20 })
   name: string;
+
+  @CreateDateColumn()
+  createAt: Date;
 }
 
 export default AssetsDirectory;

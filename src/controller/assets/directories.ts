@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2020-11-07 21:54:43
  * @LastEditors: jweboy
- * @LastEditTime: 2020-11-09 00:01:43
+ * @LastEditTime: 2020-11-15 12:03:15
  */
 import { Context } from 'koa';
 import { getRepository } from 'typeorm';
@@ -23,7 +23,10 @@ export const getDirectories = async (ctx: Context, next) => {
   const { query } = ctx.request;
 
   const repository = getRepository(AssetsDirectory);
-  const [items, total] = await repository.createQueryBuilder('assets_directory').getManyAndCount();
+  const [items, total] = await repository
+    .createQueryBuilder('assets_directory')
+    .orderBy('assets_directory.createAt', 'DESC')
+    .getManyAndCount();
 
   ctx.body = { items, total };
   next();
