@@ -14,7 +14,10 @@ exports.createDirectory = async (ctx, next) => {
 exports.getDirectories = async (ctx, next) => {
     const { query } = ctx.request;
     const repository = typeorm_1.getRepository(directories_1.default);
-    const [items, total] = await repository.createQueryBuilder('assets_directory').getManyAndCount();
+    const [items, total] = await repository
+        .createQueryBuilder('assets_directory')
+        .orderBy('assets_directory.createAt', 'DESC')
+        .getManyAndCount();
     ctx.body = { items, total };
     next();
 };

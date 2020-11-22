@@ -2,14 +2,14 @@
  * @Author: jweboy
  * @Date: 2020-02-20 21:40:56
  * @LastEditors: jweboy
- * @LastEditTime: 2020-11-07 22:00:24
+ * @LastEditTime: 2020-11-21 23:01:08
  */
 
 import Router from 'koa-router';
 import { combineRouters } from '../utils/router';
 import testRouter from './test';
 import postRouter from './post';
-import fileRouter from './file';
+import fileRouter from './assets/file';
 import directoryRouter from './assets/directories';
 
 const router = new Router();

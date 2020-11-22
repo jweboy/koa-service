@@ -2,15 +2,16 @@
  * @Author: jweboy
  * @Date: 2020-11-07 21:53:50
  * @LastEditors: jweboy
- * @LastEditTime: 2020-11-08 23:55:50
+ * @LastEditTime: 2020-11-21 14:53:47
  */
 import Router from 'koa-router';
-import { createDirectory, getDirectories } from '../../controller/assets/directories';
+import { createDirectory, deleteDirectory, getDirectories } from '../../controller/assets/directories';
 
 const router = new Router();
 
 const directoryRouter = router
-  .get('/assets/directory/', getDirectories)
-  .post('/assets/directory/create', createDirectory);
+  .get('/assets/directory/list', getDirectories)
+  .post('/assets/directory/create', createDirectory)
+  .delete('/assets/directory/delete', deleteDirectory);
 
 export default directoryRouter;

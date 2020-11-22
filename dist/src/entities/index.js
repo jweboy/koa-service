@@ -5,7 +5,6 @@ require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const post_1 = tslib_1.__importDefault(require("./post"));
 const directories_1 = tslib_1.__importDefault(require("./assets/directories"));
-require("../utils/init-env");
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_TABLE, DB_TYPE } = process.env;
 console.log(DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_TABLE, DB_TYPE);
 const options = {

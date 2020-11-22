@@ -2,12 +2,13 @@
  * @Author: jweboy
  * @Date: 2020-01-22 16:29:31
  * @LastEditors: jweboy
- * @LastEditTime: 2020-11-08 23:55:20
+ * @LastEditTime: 2020-11-21 14:36:15
  */
 import 'reflect-metadata';
 import { createConnection, ConnectionOptions, Connection } from 'typeorm';
 import Post from './post';
 import AssetsDirectory from './assets/directories';
+import '../utils/init-env';
 
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_TABLE, DB_TYPE } = process.env;
 

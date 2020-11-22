@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2020-02-20 21:10:41
  * @LastEditors: jweboy
- * @LastEditTime: 2020-11-08 23:51:14
+ * @LastEditTime: 2020-11-21 16:11:40
  */
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
@@ -14,6 +14,7 @@ import router from './routes';
 import db from './entities';
 import requestIntercept from './middleware/request-intercept';
 import './utils/init-env';
+import { DB_ERROR_DATA_DUPLICATION } from './contants/locale';
 
 const app = new Koa();
 const { PORT, PROTOCOL, HOST, DB_HOST, DB_PORT } = process.env;
@@ -36,6 +37,10 @@ app.listen(PORT, async () => {
   }
 
   // console.log(`🚀 Server running at ${PROTOCOL}://${HOST}:${PORT}/api/pet`);
+});
+
+app.on('error', (err) => {
+  console.log('app error=>', err);
 });
 
 process.on('unhandledRejection', (err) => {

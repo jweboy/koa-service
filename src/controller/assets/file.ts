@@ -2,13 +2,13 @@
  * @Author: jweboy
  * @Date: 2020-03-10 23:15:53
  * @LastEditors: jweboy
- * @LastEditTime: 2020-03-22 22:22:21
+ * @LastEditTime: 2020-11-21 22:58:01
  */
 import { Context } from 'koa';
-import { StatusCode, STATUS_TEXT } from '../contants/response';
-import { Qiniu } from '../utils/upload';
-import { Response } from '../typings/http';
-import { FileModel } from '../typings/file';
+import { StatusCode, STATUS_TEXT } from '../../contants/response';
+import { Qiniu } from '../../utils/upload';
+import { Response } from '../../typings/http';
+import { FileModel } from '../../typings/file';
 
 const qiniu = new Qiniu();
 

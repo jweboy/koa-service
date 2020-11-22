@@ -12,6 +12,10 @@ tslib_1.__decorate([
     typeorm_1.Column({ length: 20 }),
     tslib_1.__metadata("design:type", String)
 ], AssetsDirectory.prototype, "name", void 0);
+tslib_1.__decorate([
+    typeorm_1.CreateDateColumn(),
+    tslib_1.__metadata("design:type", Date)
+], AssetsDirectory.prototype, "createAt", void 0);
 AssetsDirectory = tslib_1.__decorate([
     typeorm_1.Entity()
 ], AssetsDirectory);
