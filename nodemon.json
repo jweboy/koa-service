@@ -1,5 +1,18 @@
 {
-  "watch": ["src", ".env.*"],
-  "ext": "ts",
-  "exec": "ts-node ./src/app.ts"
+  "watch": ["src"],
+  "ext": "ts,json",
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "ts-node ./src/app.ts",
+  "env": {
+    "NODE_ENV": "development",
+    "PORT": 4000,
+    "PROTOCOL": "http",
+    "HOST": "0.0.0.0",
+    "DB_TYPE": "mysql",
+    "DB_TABLE": "couponMiniprogram",
+    "DB_HOST": "127.0.0.1",
+    "DB_PORT": 3306,
+    "DB_USER": "root",
+    "DB_PASSWORD": "jl940630"
+  }
 }

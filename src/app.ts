@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2020-02-20 21:10:41
  * @LastEditors: jweboy
- * @LastEditTime: 2020-11-21 16:11:40
+ * @LastEditTime: 2021-06-14 11:35:21
  */
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
@@ -30,13 +30,12 @@ app.listen(PORT, async () => {
   try {
     await db.connect();
     console.log(`👏 Database connection succeeded at http://${DB_HOST}:${DB_PORT}`);
-    console.log(`🚀 Server running at ${PROTOCOL}://${HOST}:${PORT}/api/pet`);
+    console.log(`🚀 Server running at ${PROTOCOL}://${HOST}:${PORT}/api`);
   } catch (err) {
     console.log('err=>', err);
     throw err;
   }
-
-  // console.log(`🚀 Server running at ${PROTOCOL}://${HOST}:${PORT}/api/pet`);
+  // console.log(`🚀 Server running at ${PROTOCOL}://${HOST}:${PORT}/api`);
 });
 
 app.on('error', (err) => {

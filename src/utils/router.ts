@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2020-02-20 22:24:34
  * @LastEditors: jweboy
- * @LastEditTime: 2020-03-10 23:22:11
+ * @LastEditTime: 2021-06-13 11:05:04
  */
 import compose from 'koa-compose';
 
@@ -11,7 +11,7 @@ export function combineRouters(routers) {
     const middleware = [];
 
     routers.forEach((router) => {
-      router.prefix('/api/pet');
+      router.prefix('/api');
       middleware.push(router.routes());
       middleware.push(
         router.allowedMethods({

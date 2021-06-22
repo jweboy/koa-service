@@ -2,13 +2,14 @@
  * @Author: jweboy
  * @Date: 2020-01-22 16:29:31
  * @LastEditors: jweboy
- * @LastEditTime: 2020-11-21 14:36:15
+ * @LastEditTime: 2021-06-20 21:43:26
  */
 import 'reflect-metadata';
 import { createConnection, ConnectionOptions, Connection } from 'typeorm';
 import Post from './post';
 import AssetsDirectory from './assets/directories';
 import '../utils/init-env';
+import Coupon from './coupon';
 
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_TABLE, DB_TYPE } = process.env;
 
@@ -21,7 +22,8 @@ const options: ConnectionOptions = {
   database: DB_TABLE,
   synchronize: true,
   logging: ['error', 'schema'],
-  entities: [Post, AssetsDirectory],
+  entities: [Coupon],
+  // entities: [Post, AssetsDirectory, Coupon],
 };
 
 /*

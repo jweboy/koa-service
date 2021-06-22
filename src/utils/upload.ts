@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2020-03-09 00:03:22
  * @LastEditors: jweboy
- * @LastEditTime: 2020-03-23 23:08:02
+ * @LastEditTime: 2021-06-13 18:02:47
  */
 import qiniu, { rs } from 'qiniu';
 import { File } from '@koa/multer';

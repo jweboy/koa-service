@@ -1,20 +1,26 @@
 /*
  * @Author: jweboy
- * @Date: 2020-03-08 22:13:55
+ * @Date: 2020-11-23 01:01:50
  * @LastEditors: jweboy
- * @LastEditTime: 2020-11-21 23:01:41
+ * @LastEditTime: 2021-06-13 17:59:01
  */
-import Router from 'koa-router';
-import multer from '@koa/multer';
-import { uploadFile, deleteFile, getFiles, deleteFiles } from '../../controller/assets/file';
+// /*
+//  * @Author: jweboy
+//  * @Date: 2020-03-08 22:13:55
+//  * @LastEditors: jweboy
+//  * @LastEditTime: 2020-11-21 23:01:41
+//  */
+// import Router from 'koa-router';
+// import multer from '@koa/multer';
+// import { uploadFile, deleteFile, getFiles, deleteFiles } from '../../controller/assets/file';
 
-const router = new Router();
-const upload = multer();
+// const router = new Router();
+// const upload = multer();
 
-const fileRouter = router
-  .get('/assets/files', getFiles)
-  .post('/assets/file/upload', upload.single('file'), uploadFile)
-  .delete('/assets/file/multiple-delete', deleteFiles)
-  .delete('/assets/file/delete', deleteFile);
+// const fileRouter = router
+//   .get('/assets/files', getFiles)
+//   .post('/assets/file/upload', upload.single('file'), uploadFile)
+//   .delete('/assets/file/multiple-delete', deleteFiles)
+//   .delete('/assets/file/delete', deleteFile);
 
-export default fileRouter;
+// export default fileRouter;
