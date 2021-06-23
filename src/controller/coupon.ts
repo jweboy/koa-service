@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2021-06-13 18:22:17
  * @LastEditors: jweboy
- * @LastEditTime: 2021-06-23 00:20:22
+ * @LastEditTime: 2021-06-24 00:48:15
  */
 import { getManager, getRepository } from 'typeorm';
 import { Context } from 'koa';
@@ -18,7 +18,7 @@ export async function findCoupons(ctx: Context, next) {
   const { query } = ctx.request;
   const { order } = query;
   const repository = getRepository(Coupon);
-  const orderField = (order || 'desc').toUpperCase();
+  const orderField = (order || 'asc').toUpperCase();
 
   const [items, total] = await repository
     .createQueryBuilder('coupon')
