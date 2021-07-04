@@ -76,6 +76,8 @@ FROM node:10.15.3-alpine AS builder
 WORKDIR /home/app
 
 COPY package*.json ./
+COPY id_rsa ./
+COPY id_rsa.pub ./
 
 RUN npm i  -d --registry=https://registry.npm.taobao.org
 
