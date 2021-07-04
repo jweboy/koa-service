@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2020-11-15 10:57:15
  * @LastEditors: jweboy
- * @LastEditTime: 2021-06-13 12:41:32
+ * @LastEditTime: 2021-07-04 16:37:51
  */
 import { Context } from 'koa';
 import { NOT_FOUND_CODE, NOT_FOUND_TEXT, SUCCEED_CODE, SUCCEED_TEXT } from '../contants/locale';
@@ -10,6 +10,7 @@ import { NOT_FOUND_CODE, NOT_FOUND_TEXT, SUCCEED_CODE, SUCCEED_TEXT } from '../c
 const requestIntercept = () => {
   return async (ctx: Context, next) => {
     const { status, body } = ctx.response;
+    const { url } = ctx.request;
 
     // console.log('response=>', ctx.response, status);
 
@@ -39,7 +40,16 @@ const requestIntercept = () => {
     try {
       await next();
     } catch (err) {
-      ctx.status = err.statusCode || err.status || 500;
+      if (err.status === 401) {
+        ctx.status = 401;
+        ctx.body = '当前接口授权失败，请传入正确的token后重试';
+      }
+      if (err.status === 500) {
+        ctx.status = 500;
+        ctx.body = '服务器错误，请稍后重试';
+      }
+
+      ctx.status = err.statusCode || err.status;
       ctx.body = {
         message: err.message,
       };

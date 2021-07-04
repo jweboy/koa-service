@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2020-02-20 21:10:41
  * @LastEditors: jweboy
- * @LastEditTime: 2021-06-14 11:35:21
+ * @LastEditTime: 2021-07-04 17:16:53
  */
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
@@ -10,11 +10,13 @@ import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
 import logger from 'koa-logger';
 import path from 'path';
+import jwt from 'koa-jwt';
+import jsonwebtoken from 'jsonwebtoken';
 import router from './routes';
 import db from './entities';
-import requestIntercept from './middleware/request-intercept';
+import requestIntercept from './middleware/request_intercept';
 import './utils/init-env';
-import { DB_ERROR_DATA_DUPLICATION } from './contants/locale';
+import tokenInterceptor from './middleware/token_interceptor';
 
 const app = new Koa();
 const { PORT, PROTOCOL, HOST, DB_HOST, DB_PORT } = process.env;
@@ -25,6 +27,7 @@ app
   .use(router())
   .use(logger())
   .use(requestIntercept());
+// .use(tokenInterceptor());
 
 app.listen(PORT, async () => {
   try {
