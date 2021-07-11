@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2020-02-20 21:10:41
  * @LastEditors: jweboy
- * @LastEditTime: 2021-07-04 17:16:53
+ * @LastEditTime: 2021-07-05 22:37:25
  */
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
@@ -26,8 +26,8 @@ app
   .use(cors())
   .use(router())
   .use(logger())
-  .use(requestIntercept());
-// .use(tokenInterceptor());
+  .use(requestIntercept())
+  .use(tokenInterceptor());
 
 app.listen(PORT, async () => {
   try {
