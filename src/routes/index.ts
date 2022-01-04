@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2020-02-20 21:40:56
  * @LastEditors: jweboy
- * @LastEditTime: 2021-07-04 16:31:09
+ * @LastEditTime: 2021-12-12 16:08:27
  */
 
 import Router from 'koa-router';
@@ -13,6 +13,8 @@ import directoryRouter from './assets/directories';
 import FileRouter from './file';
 import couponRouter from './coupon';
 import publicRouter from './public';
+import qiniuRouter from './qiniu';
+import commodityRouter from './commodity';
 
 const router = new Router();
 
@@ -28,4 +30,6 @@ export default combineRouters([
   FileRouter,
   couponRouter,
   publicRouter,
+  qiniuRouter,
+  commodityRouter,
 ]);

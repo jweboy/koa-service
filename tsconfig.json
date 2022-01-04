@@ -3,7 +3,7 @@
     "target": "ESNEXT",
     "module": "commonjs",
     "lib": ["ESNext"],
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "dist",
     "rootDir": "src",
     "removeComments": true,
@@ -11,12 +11,18 @@
     "downlevelIteration": true,
     "moduleResolution": "node",
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    },
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "exclude": [
+    "node_modules/",
+    "dist/",
+    "tests/fixtures/"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "tests/**/*.ts"
+  ],
 }

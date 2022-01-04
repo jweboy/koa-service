@@ -5,14 +5,13 @@
   "exec": "ts-node ./src/app.ts",
   "env": {
     "NODE_ENV": "development",
-    "PORT": 4000,
-    "PROTOCOL": "http",
-    "HOST": "0.0.0.0",
+    "SERVER_HOST": "0.0.0.0",
+    "SERVER_PORT": 5001,
+    "DB_HOST": "rm-bp18bi364r33z24d64o.mysql.rds.aliyuncs.com",
     "DB_TYPE": "mysql",
-    "DB_TABLE": "couponMiniprogram",
-    "DB_HOST": "127.0.0.1",
+    "DB_TABLE": "demo",
     "DB_PORT": 3306,
-    "DB_USER": "root",
-    "DB_PASSWORD": "jl940630"
+    "DB_USER": "jl",
+    "DB_PASSWORD": "Jl940630"
   }
 }

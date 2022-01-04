@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2020-11-07 21:54:43
  * @LastEditors: jweboy
- * @LastEditTime: 2020-11-21 16:13:11
+ * @LastEditTime: 2021-10-05 12:16:00
  */
 import { Context } from 'koa';
 import { getRepository } from 'typeorm';
@@ -34,9 +34,9 @@ export const createDirectory = async (ctx: Context, next) => {
 export const deleteDirectory = async (ctx: Context, next) => {
   const { query } = ctx.request;
   const repository = getRepository(AssetsDirectory);
-  const data = await repository.findOne(query.id);
+  // const data = await repository.findOne(query.id);
 
-  await repository.remove(data);
+  // await repository.remove(data);
   next();
 };
 

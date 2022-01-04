@@ -2,15 +2,13 @@
  * @Author: jweboy
  * @Date: 2020-03-10 23:15:53
  * @LastEditors: jweboy
- * @LastEditTime: 2021-06-13 23:16:03
+ * @LastEditTime: 2021-10-06 16:27:21
  */
 import { Context } from 'koa';
 import { StatusCode, STATUS_TEXT } from '../contants/response';
-import { Qiniu } from '../utils/upload';
+import qiniu from '../utils/upload';
 import { Response } from '../typings/http';
 import { FileModel } from '../typings/file';
-
-const qiniu = new Qiniu();
 
 export async function uploadFile(ctx: Context) {
   const { body } = ctx.request;
@@ -60,17 +58,9 @@ export async function getFiles(ctx: Context) {
 
   try {
     const data = await qiniu.getFiles(query);
-    // @ts-ignore
-    const files = data.items.reduce((arr, file, index) => {
-      arr.push({
-        ...file,
-        id: index + 1,
-        name: file.key,
-      });
-      return arr;
-    }, []);
     const resp = {
-      data: { items: files },
+      // @ts-ignore
+      data: { items: data.items },
       msg: STATUS_TEXT[StatusCode.Success].text,
       code: StatusCode.Success,
     };

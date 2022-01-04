@@ -2,30 +2,28 @@
  * @Author: jweboy
  * @Date: 2021-06-13 18:22:17
  * @LastEditors: jweboy
- * @LastEditTime: 2021-06-24 00:48:15
+ * @LastEditTime: 2021-10-05 11:37:59
  */
 import { getManager, getRepository } from 'typeorm';
 import { Context } from 'koa';
-import Qiniu from '../utils/upload';
+import qiniu from '../utils/upload';
 import { ListModel } from '../typings/list';
 import Coupon from '../entities/coupon';
 import { Response } from '../typings/http';
 import { STATUS_TEXT, StatusCode } from '../contants/response';
 
-const qiniu = new Qiniu();
-
 export async function findCoupons(ctx: Context, next) {
-  const { query } = ctx.request;
-  const { order } = query;
-  const repository = getRepository(Coupon);
-  const orderField = (order || 'asc').toUpperCase();
+  // const { query } = ctx.request;
+  // const { order } = query;
+  // const repository = getRepository(Coupon);
+  // const orderField = (order || 'asc').toUpperCase();
 
-  const [items, total] = await repository
-    .createQueryBuilder('coupon')
-    .orderBy('coupon.id', orderField)
-    .getManyAndCount();
+  // const [items, total] = await repository
+  //   .createQueryBuilder('coupon')
+  //   .orderBy('coupon.id', orderField)
+  //   .getManyAndCount();
 
-  ctx.body = { items, total };
+  // ctx.body = { items, total };
   next();
 }
 

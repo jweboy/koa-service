@@ -2,13 +2,13 @@
  * @Author: jweboy
  * @Date: 2020-03-09 00:03:22
  * @LastEditors: jweboy
- * @LastEditTime: 2021-06-13 18:02:47
+ * @LastEditTime: 2021-10-06 16:25:45
  */
-import qiniu, { rs } from 'qiniu';
+import * as qiniuSDK from 'qiniu';
 import { File } from '@koa/multer';
 import { FileModel, FileQueryModel, DeleteFileModel } from '../typings/file';
 
-export class Qiniu {
+class Qiniu {
   secretKey: string;
 
   accessKey: string;
@@ -17,7 +17,7 @@ export class Qiniu {
 
   baseUrl: string;
 
-  listPrefixOptions: rs.ListPrefixOptions;
+  listPrefixOptions: qiniuSDK.rs.ListPrefixOptions;
 
   constructor() {
     // AccessKey = KgNS98Sj66CuXFi64xNHs11vfrO8iXmX8Zcht-Id
@@ -30,23 +30,23 @@ export class Qiniu {
   }
 
   static get config() {
-    const config = new qiniu.conf.Config();
+    const config = new qiniuSDK.conf.Config();
 
     return config;
   }
 
   private get mac() {
-    return new qiniu.auth.digest.Mac(this.accessKey, this.secretKey);
+    return new qiniuSDK.auth.digest.Mac(this.accessKey, this.secretKey);
   }
 
   private get bucketManager() {
-    return new qiniu.rs.BucketManager(this.mac, Qiniu.config);
+    return new qiniuSDK.rs.BucketManager(this.mac, Qiniu.config);
   }
 
   private getToken(key?: string) {
     const options = this.getOptions(key);
 
-    const putPolicy = new qiniu.rs.PutPolicy(options);
+    const putPolicy = new qiniuSDK.rs.PutPolicy(options);
     return putPolicy.uploadToken(this.mac);
   }
 
@@ -57,7 +57,7 @@ export class Qiniu {
     const options = {
       scope: key ? `${this.bucket}:${key}` : this.bucket,
       returnBody:
-        '{"url":"http://assets.jweboy.com/$(key)","hash":"$(etag)","size":$(fsize),"bucket":"$(bucket)","name":"$(fname)", "prefix": "$(x:prefix)", "id": "$(uuid)"}',
+        '{"url":"https://assets.jweboy.com/$(key)","hash":"$(etag)","size":$(fsize),"bucket":"$(bucket)","name":"$(x:name)", "prefix": "$(x:prefix)", "id": "$(uuid)"}',
     };
 
     return options;
@@ -65,8 +65,8 @@ export class Qiniu {
 
   public uploadFile(key: string, fileObj: File) {
     const { originalname, buffer } = fileObj;
-    const formUploader = new qiniu.form_up.FormUploader(Qiniu.config);
-    const putExtra = new qiniu.form_up.PutExtra();
+    const formUploader = new qiniuSDK.form_up.FormUploader(Qiniu.config);
+    const putExtra = new qiniuSDK.form_up.PutExtra();
     const fileKey = key ? `${key}/${originalname}` : originalname;
     const token = this.getToken(fileKey);
 
@@ -92,7 +92,7 @@ export class Qiniu {
 
   public deleteFile(fileObj: FileModel) {
     const { fileName, key } = fileObj;
-    const bucketManager = new qiniu.rs.BucketManager(this.mac, Qiniu.config);
+    const bucketManager = new qiniuSDK.rs.BucketManager(this.mac, Qiniu.config);
     const fileKey = key ? `${key}/${fileName}` : fileName;
 
     return new Promise((resolve, reject) => {
@@ -116,8 +116,6 @@ export class Qiniu {
     const regexp = /^\//; // 检测前缀是否带有 /
     this.listPrefixOptions.prefix = fileQuery.prefix;
     this.listPrefixOptions.limit = fileQuery.size;
-
-    console.log(this.listPrefixOptions);
 
     return new Promise((resolve, reject) => {
       this.bucketManager.listPrefix(this.bucket, this.listPrefixOptions, (respErr, respBody, respInfo) => {
@@ -152,7 +150,7 @@ export class Qiniu {
   public deleteFiles(data: DeleteFileModel) {
     const { names = [], prefix } = data;
     const operations = names.map((name) => {
-      return qiniu.rs.deleteOp(this.bucket, `${prefix}/${name}`);
+      return qiniuSDK.rs.deleteOp(this.bucket, `${prefix}/${name}`);
     });
 
     return new Promise((resolve, reject) => {
@@ -167,6 +165,25 @@ export class Qiniu {
       });
     });
   }
+
+  listPrefix() {
+    return new Promise((resolve, reject) => {
+      const bucketManager = new qiniuSDK.rs.BucketManager(this.mac, Qiniu.config);
+      // @ts-ignore
+      bucketManager.getBucketInfo('assets', (err, respBody, respInfo) => {
+        if (err) {
+          reject(err);
+        }
+        console.log(err, respBody);
+
+        if (respInfo.statusCode === 200) {
+          resolve(respBody);
+        }
+      });
+    });
+  }
 }
 
-export default Qiniu;
+const qiniu = new Qiniu();
+
+export default qiniu;

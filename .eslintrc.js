@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2019-12-03 16:18:35
  * @LastEditors: jweboy
- * @LastEditTime: 2020-02-21 23:08:33
+ * @LastEditTime: 2022-01-04 15:33:44
  */
 /**
  * @name 常规代码规则，
@@ -47,5 +47,6 @@ module.exports = {
     'no-shadow': 0,
     'no-underscore-dangle': 0, //
     'import/no-extraneous-dependencies': 0,
+    camelcase: 0,
   }
 };

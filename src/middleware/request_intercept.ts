@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2020-11-15 10:57:15
  * @LastEditors: jweboy
- * @LastEditTime: 2021-07-04 16:37:51
+ * @LastEditTime: 2021-10-05 12:16:59
  */
 import { Context } from 'koa';
 import { NOT_FOUND_CODE, NOT_FOUND_TEXT, SUCCEED_CODE, SUCCEED_TEXT } from '../contants/locale';
@@ -25,7 +25,9 @@ const requestIntercept = () => {
     // }
 
     // 业务逻辑错误，如同名记录等
+    // @ts-ignore
     if (body && body.error) {
+      // @ts-ignore
       const { error, ...restProps } = body;
       ctx.body = restProps;
     } else {

@@ -2,54 +2,20 @@
  * @Author: jweboy
  * @Date: 2020-01-22 16:29:31
  * @LastEditors: jweboy
- * @LastEditTime: 2021-06-20 21:43:26
+ * @LastEditTime: 2022-01-04 14:49:41
  */
-import 'reflect-metadata';
-import { createConnection, ConnectionOptions, Connection } from 'typeorm';
 import Post from './post';
 import AssetsDirectory from './assets/directories';
-import '../utils/init-env';
 import Coupon from './coupon';
+import User from './user';
+import Commodity from './commodity';
+import Database from '../utils/database';
 
-const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_TABLE, DB_TYPE } = process.env;
+export const createDatebase = () => {
+  const db = new Database({
+    entities: [User, Commodity],
+    // entities: [Post, AssetsDirectory, Coupon],
+  });
 
-const options: ConnectionOptions = {
-  type: 'mysql',
-  host: DB_HOST,
-  port: 3306,
-  username: DB_USER,
-  password: DB_PASSWORD,
-  database: DB_TABLE,
-  synchronize: true,
-  logging: ['error', 'schema'],
-  entities: [Coupon],
-  // entities: [Post, AssetsDirectory, Coupon],
+  return db.connect();
 };
-
-/*
- * @Author: jweboy
- * @Date: 2020-02-21 22:19:11
- * @LastEditors: jweboy
- * @LastEditTime: 2020-02-21 22:21:14
- */
-class Database {
-  private connection: Connection;
-
-  public async connect(): Promise<Connection> {
-    if (this.connection) {
-      await this.connection.connect();
-      return this.connection;
-    }
-
-    this.connection = await createConnection(options);
-    return this.connection;
-  }
-
-  public getTable(repository) {
-    return this.connection.getRepository(repository);
-  }
-}
-
-const db = new Database();
-
-export default db;
