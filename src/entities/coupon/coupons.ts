@@ -2,18 +2,12 @@
  * @Author: jweboy
  * @Date: 2021-06-13 18:18:49
  * @LastEditors: jweboy
- * @LastEditTime: 2021-06-20 21:28:30
- */
-/*
- * @Author: jweboy
- * @Date: 2020-02-20 22:51:38
- * @LastEditors: jweboy
- * @LastEditTime: 2020-03-14 17:05:00
+ * @LastEditTime: 2022-01-26 14:22:40
  */
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 
 @Entity()
-class Coupon {
+class Coupons {
   @PrimaryGeneratedColumn() //  自
   id: number;
 
@@ -30,4 +24,4 @@ class Coupon {
   createDate: Date;
 }
 
-export default Coupon;
+export default Coupons;

@@ -2,7 +2,7 @@
  * @Author: jweboy
  * @Date: 2019-12-03 16:18:35
  * @LastEditors: jweboy
- * @LastEditTime: 2022-01-04 15:33:44
+ * @LastEditTime: 2022-01-25 11:43:50
  */
 /**
  * @name 常规代码规则，
@@ -26,11 +26,11 @@ module.exports = {
     'prettier',
   ],
   env: {
-    browser: true, // 浏览器环境中的全局变量
     es6: true, // 启用除了 `modules` 以外的所有 `ECMAScript 6` 特性（该选项会自动设置 `ecmaVersion` 解析器选项为 6）
     node: true, // `Node.js` 全局变量和 `Node.js` 作用域
   },
   parserOptions: {
+    ecmaVersion: 'latest', // Allows the use of modern ECMAScript features
     sourceType: 'module', // `ECMAScript` 模块
     ecmaFeatures: {
       experimentalObjectRestSpread: true, // 对象剩余参数解构
