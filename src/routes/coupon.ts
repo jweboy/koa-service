@@ -6,7 +6,7 @@
  */
 import Router from 'koa-router';
 import multer from '@koa/multer';
-import { createCoupon, deleteCoupon, editCoupon, findCoupons, getCouponConfig } from '../controller/coupon';
+import { createCoupon, deleteCoupon, editCoupon, findCoupons, getCouponConfig } from '../controller/coupon/coupon';
 
 const router = new Router();
 

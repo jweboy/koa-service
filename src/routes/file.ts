@@ -2,11 +2,11 @@
  * @Author: jweboy
  * @Date: 2020-03-08 22:13:55
  * @LastEditors: jweboy
- * @LastEditTime: 2021-06-13 18:15:02
+ * @LastEditTime: 2022-04-20 11:14:52
  */
 import Router from 'koa-router';
 import multer from '@koa/multer';
-import { uploadFile, deleteFile, getFiles, deleteFiles } from '../controller/file';
+import { uploadFile, deleteFile, getFiles, deleteFiles } from '../controller/qiniu/_file';
 
 const router = new Router();
 const upload = multer();

@@ -2,12 +2,14 @@
  * @Author: jweboy
  * @Date: 2020-02-20 21:10:41
  * @LastEditors: jweboy
- * @LastEditTime: 2022-01-04 18:13:29
+ * @LastEditTime: 2022-04-24 14:31:12
  */
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
 import logger from 'koa-logger';
+import http from 'http';
+import { Server, Socket } from 'socket.io';
 import router from './routes';
 import { createDatebase } from './entities';
 import requestIntercept from './middleware/request_intercept';
@@ -22,10 +24,18 @@ app
   .use(cors())
   .use(router())
   .use(logger())
-  .use(requestIntercept())
-  .use(tokenInterceptor());
+  .use(requestIntercept());
+// .use(tokenInterceptor());
 
-app.listen(SERVER_PORT, async () => {
+const httpServer = http.createServer(app.callback());
+// const io = new Server(httpServer);
+
+// io.on('connection', (socket: Socket) => {
+//   console.log('socket connection');
+//   /* … */
+// });
+
+httpServer.listen(SERVER_PORT, async () => {
   try {
     await createDatebase();
     console.log(`👏 Database connection succeeded at http://${DB_HOST}:${DB_PORT}`);
@@ -37,9 +47,9 @@ app.listen(SERVER_PORT, async () => {
   // console.log(`🚀 Server running at ${PROTOCOL}://${HOST}:${PORT}/api`);
 });
 
-app.on('error', (err) => {
-  console.log('app error=>', err);
-});
+// app.on('error', (err) => {
+//   console.log('app error=>', err);
+// });
 
 process.on('unhandledRejection', (err) => {
   throw err;

@@ -5,13 +5,15 @@
  * @LastEditTime: 2021-12-04 17:21:55
  */
 import Router from 'koa-router';
-import { getRefreshToken, postUserLogin } from '../controller/public';
+import { postUserRegister, postUserLogin } from '../controller';
+import { getRefreshToken } from '../controller/public/public';
 
 const router = new Router();
 
 const publicRouter = router
   .prefix('/public')
   .get('/token', getRefreshToken)
-  .post('/login', postUserLogin);
+  .post('/login', postUserLogin)
+  .post('/register', postUserRegister);
 
 export default publicRouter;

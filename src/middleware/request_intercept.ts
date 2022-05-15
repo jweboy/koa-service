@@ -10,33 +10,18 @@ import { NOT_FOUND_CODE, NOT_FOUND_TEXT, SUCCEED_CODE, SUCCEED_TEXT } from '../c
 const requestIntercept = () => {
   return async (ctx: Context, next) => {
     const { status, body } = ctx.response;
-    const { url } = ctx.request;
-
-    // console.log('response=>', ctx.response, status);
-
-    // 接口地址 404
-    // if (status === NOT_FOUND_CODE) {
-    //   ctx.body = {
-    //     code: NOT_FOUND_CODE,
-    //     msg: NOT_FOUND_TEXT,
-    //     data: null,
-    //   };
-    //   // return;
-    // }
+    // const { url } = ctx.request;
+    console.log('body', body);
 
     // 业务逻辑错误，如同名记录等
     // @ts-ignore
     if (body && body.error) {
       // @ts-ignore
-      const { error, ...restProps } = body;
-      ctx.body = restProps;
+      const { error, code } = body;
+      ctx.body = { code, msg: error, data: null };
     } else {
       // 正常返回
-      ctx.body = {
-        code: SUCCEED_CODE,
-        msg: SUCCEED_TEXT,
-        data: body || null,
-      };
+      ctx.body = { code: SUCCEED_CODE, msg: SUCCEED_TEXT, data: body || null };
     }
 
     try {

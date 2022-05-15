@@ -2,17 +2,17 @@
  * @Author: jweboy
  * @Date: 2020-03-10 23:15:53
  * @LastEditors: jweboy
- * @LastEditTime: 2021-10-06 16:27:21
+ * @LastEditTime: 2022-04-24 13:16:24
  */
 import { Context } from 'koa';
-import { StatusCode, STATUS_TEXT } from '../contants/response';
-import qiniu from '../utils/upload';
-import { Response } from '../typings/http';
-import { FileModel } from '../typings/file';
+import { StatusCode, STATUS_TEXT } from '../../contants/response';
+import qiniu from '../../utils/upload';
+import { Response } from '../../typings/http';
+import { FileModel } from '../../typings/file';
 
 export async function uploadFile(ctx: Context) {
   const { body } = ctx.request;
-  // console.log('上传文件请求参数 ----->', body, ctx.file);
+  console.log('上传文件请求参数 ----->', body, ctx.file, body);
 
   try {
     const fileData = await qiniu.uploadFile(body.key, ctx.file);

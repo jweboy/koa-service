@@ -30,10 +30,11 @@ module.exports = {
     node: true, // `Node.js` 全局变量和 `Node.js` 作用域
   },
   parserOptions: {
-    ecmaVersion: 'latest', // Allows the use of modern ECMAScript features
+    ecmaVersion: 6, // Allows the use of modern ECMAScript features
     sourceType: 'module', // `ECMAScript` 模块
     ecmaFeatures: {
       experimentalObjectRestSpread: true, // 对象剩余参数解构
+      modules: true
     },
   },
   rules: {

@@ -2,11 +2,12 @@
  * @Author: jweboy
  * @Date: 2020-03-09 00:03:22
  * @LastEditors: jweboy
- * @LastEditTime: 2021-10-06 16:25:45
+ * @LastEditTime: 2022-04-24 22:21:30
  */
 import * as qiniuSDK from 'qiniu';
 import { File } from '@koa/multer';
 import { FileModel, FileQueryModel, DeleteFileModel } from '../typings/file';
+import { SUCCEED_CODE } from '../contants/locale';
 
 class Qiniu {
   secretKey: string;
@@ -31,6 +32,14 @@ class Qiniu {
 
   static get config() {
     const config = new qiniuSDK.conf.Config();
+
+    // 空间对应的机房，默认华东地区机房
+    // @ts-ignore
+    config.zone = qiniuSDK.zone.Zone_z0;
+    // 是否使用https域名
+    //config.useHttpsDomain = true;
+    // 上传是否使用cdn加速
+    //config.useCdnDomain = true;
 
     return config;
   }
@@ -64,11 +73,14 @@ class Qiniu {
   }
 
   public uploadFile(key: string, fileObj: File) {
+    console.log(33, fileObj);
     const { originalname, buffer } = fileObj;
     const formUploader = new qiniuSDK.form_up.FormUploader(Qiniu.config);
     const putExtra = new qiniuSDK.form_up.PutExtra();
     const fileKey = key ? `${key}/${originalname}` : originalname;
     const token = this.getToken(fileKey);
+
+    console.log('token=>', token);
 
     // 额外参数
     putExtra.fname = originalname;
@@ -119,6 +131,7 @@ class Qiniu {
 
     return new Promise((resolve, reject) => {
       this.bucketManager.listPrefix(this.bucket, this.listPrefixOptions, (respErr, respBody, respInfo) => {
+        console.log(respErr, respBody);
         if (respErr) {
           reject(respErr);
         } else if (respInfo.statusCode !== 200) {
@@ -127,7 +140,7 @@ class Qiniu {
           const { items } = respBody;
           const nextMarker = respBody.marker;
           // 如果这个nextMarker不为空，那么还有未列举完毕的文件列表，下次调用listPrefix的时候，指定options里面的marker为这个值
-          this.listPrefixOptions.marker = nextMarker;
+          // this.listPrefixOptions.marker = nextMarker;
 
           const resp = items.reduce((arr, item) => {
             arr.push({
@@ -136,6 +149,7 @@ class Qiniu {
             });
             return arr;
           }, []);
+          console.log(resp);
           resolve({
             items: resp,
           });
@@ -179,6 +193,44 @@ class Qiniu {
         if (respInfo.statusCode === 200) {
           resolve(respBody);
         }
+      });
+    });
+  }
+
+  formatCustomError(err: Error) {
+    const { message } = err;
+    if (message) {
+      const errors = message.split('\n').map((item) => JSON.parse(item));
+      const [code, { error }] = errors;
+      return { code, msg: error, data: null };
+    }
+  }
+
+  handleResponseCallback(err, respBody, respInfo) {
+    if (err !== null) {
+      return this.formatCustomError(err);
+    } else {
+      const { statusCode } = respInfo;
+      if (statusCode == 200) {
+        return { code: SUCCEED_CODE, data: respBody, msg: '请求成功' };
+      } else {
+        return { code: statusCode, msg: respBody.error, data: null };
+      }
+    }
+  }
+
+  getPublicUrl(key: string) {
+    const url = this.bucketManager.publicDownloadUrl(this.baseUrl, key);
+    return url;
+  }
+
+  // @ts-ignore
+  getFileInfo<T>(bucket: string, key: string): Promise<Public.Response<T>> {
+    return new Promise((resolve) => {
+      this.bucketManager.stat(bucket || this.bucket, key, (err, respBody, respInfo) => {
+        // console.log(err, respBody, respInfo);
+        const result = this.handleResponseCallback(err, respBody, respInfo);
+        resolve(result);
       });
     });
   }

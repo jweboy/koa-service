@@ -7,10 +7,10 @@
 import { getManager, getRepository } from 'typeorm';
 import { Context } from 'koa';
 import { nextTick } from 'process';
-import { ListModel } from '../typings/list';
-import Post from '../entities/post';
-import { Response } from '../typings/http';
-import { STATUS_TEXT, StatusCode } from '../contants/response';
+import { ListModel } from '../../typings/list';
+import Post from '../../entities/post';
+import { Response } from '../../typings/http';
+import { STATUS_TEXT, StatusCode } from '../../contants/response';
 
 export async function findPosts(ctx: Context, next) {
   const repository = getRepository(Post);

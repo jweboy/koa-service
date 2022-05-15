@@ -12,10 +12,11 @@ import Commodity from './commodity';
 import Database from '../utils/database';
 import { CouponBasicConfig } from './coupon/basic_config';
 import Coupons from './coupon/coupons';
+import Signin from './juejin/signin';
 
 export const createDatebase = () => {
   const db = new Database({
-    entities: [User, Commodity, CouponBasicConfig, Coupons],
+    entities: [User, Commodity, CouponBasicConfig, Coupons, Signin],
     // entities: [Post, AssetsDirectory],
   });
 

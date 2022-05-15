@@ -8,9 +8,9 @@ import { SIGN_SECRET } from '../contants/public';
  * @LastEditors: jweboy
  * @LastEditTime: 2021-12-12 16:23:30
  */
-export const getToken = () => {
-  const uuid = v4();
-  const token = sign({ uuid }, SIGN_SECRET);
+export const getToken = (options?: any) => {
+  const payload = options || v4();
+  const token = sign(payload, SIGN_SECRET);
 
   return token;
 };

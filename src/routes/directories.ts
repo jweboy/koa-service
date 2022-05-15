@@ -5,7 +5,7 @@
  * @LastEditTime: 2020-11-21 14:53:47
  */
 import Router from 'koa-router';
-import { createDirectory, deleteDirectory, getDirectories } from '../../controller/assets/directories';
+import { createDirectory, deleteDirectory, getDirectories } from '../controller/assets/directories';
 
 const router = new Router();
 

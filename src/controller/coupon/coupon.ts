@@ -6,12 +6,12 @@
  */
 import { getManager, getRepository } from 'typeorm';
 import { Context } from 'koa';
-import qiniu from '../utils/upload';
-import { ListModel } from '../typings/list';
-import Coupon from '../entities/coupon/coupons';
-import { Response } from '../typings/http';
-import { STATUS_TEXT, StatusCode } from '../contants/response';
-import { CouponBasicConfig } from '../entities/coupon/basic_config';
+import qiniu from '../../utils/upload';
+import { ListModel } from '../../typings/list';
+import Coupon from '../../entities/coupon/coupons';
+import { Response } from '../../typings/http';
+import { STATUS_TEXT, StatusCode } from '../../contants/response';
+import { CouponBasicConfig } from '../../entities/coupon/basic_config';
 
 export async function findCoupons(ctx: Context, next) {
   const { query } = ctx.request;

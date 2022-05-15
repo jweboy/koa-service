@@ -6,7 +6,7 @@
  */
 import Router from 'koa-router';
 import multer from '@koa/multer';
-import { createCommodity, deleteCommodityRecord, findCommodity, updateCommodity } from '../../controller/commodity';
+import { createCommodity, deleteCommodityRecord, findCommodity, updateCommodity } from '../controller/commodity';
 
 const router = new Router();
 

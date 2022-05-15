@@ -5,10 +5,11 @@
  * @LastEditTime: 2020-03-11 23:11:31
  */
 import Router from 'koa-router';
-import { findPosts, createPost } from '../controller/post/post';
 
 const router = new Router();
 
-const postRouter = router.get('/posts', findPosts).post('/post', createPost);
+const mockRoutes = router.get('/', (ctx) => {
+  ctx.body = 'API接口';
+});
 
-export default postRouter;
+export default mockRoutes;
