@@ -15,6 +15,7 @@ import { createDatebase } from './entities';
 import requestIntercept from './middleware/request_intercept';
 import './utils/init-env';
 import tokenInterceptor from './middleware/token_interceptor';
+import { initRedis } from './utils/redis';
 
 const app = new Koa();
 const { SERVER_PORT, SERVER_HOST, DB_HOST, DB_PORT } = process.env;
@@ -38,6 +39,7 @@ const httpServer = http.createServer(app.callback());
 httpServer.listen(SERVER_PORT, async () => {
   try {
     await createDatebase();
+    await initRedis();
     console.log(`👏 Database connection succeeded at http://${DB_HOST}:${DB_PORT}`);
     console.log(`🚀 Server running at http://${SERVER_HOST}:${SERVER_PORT}/api`);
   } catch (err) {

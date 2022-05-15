@@ -19,4 +19,6 @@ export enum ErrorCode {
   InvalidUser,
   NotSigninForJuejin,
   SignedIn,
+  NoCookie,
+  CookieExpired,
 }

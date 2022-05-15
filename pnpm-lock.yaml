@@ -17,6 +17,7 @@ specifiers:
   '@typescript-eslint/parser': ^2.15.0
   bcryptjs: ^2.4.3
   cross-env: ^7.0.0
+  dayjs: ^1.11.2
   dotenv: ^8.2.0
   dotenv-flow: ^3.2.0
   eslint: ^6.7.2
@@ -38,6 +39,7 @@ specifiers:
   prettier: ^1.15.3
   qiniu: ^7.4.0
   qs: ^6.10.3
+  redis: ^4.1.0
   reflect-metadata: ^0.1.13
   socket.io: ^4.5.0
   ts-node: ^8.6.2
@@ -52,6 +54,7 @@ dependencies:
   '@koa/multer': 2.0.2_multer@1.4.3
   bcryptjs: 2.4.3
   cross-env: 7.0.3
+  dayjs: 1.11.2
   dotenv: registry.nlark.com/dotenv/8.6.0
   dotenv-flow: 3.2.0
   jsonwebtoken: registry.nlark.com/jsonwebtoken/8.5.1
@@ -66,10 +69,11 @@ dependencies:
   mysql: registry.nlark.com/mysql/2.18.1
   qiniu: registry.nlark.com/qiniu/7.4.0
   qs: 6.10.3
+  redis: 4.1.0
   reflect-metadata: registry.nlark.com/reflect-metadata/0.1.13
   socket.io: 4.5.0
   tslib: 2.3.1
-  typeorm: 0.2.38
+  typeorm: 0.2.38_redis@4.1.0
   undici: 5.0.0
   uuid: registry.nlark.com/uuid/8.3.2
 
@@ -112,6 +116,55 @@ packages:
       multer: '*'
     dependencies:
       multer: registry.nlark.com/multer/1.4.3
+    dev: false
+
+  /@redis/bloom/1.0.2_@redis+client@1.1.0:
+    resolution: {integrity: sha512-EBw7Ag1hPgFzdznK2PBblc1kdlj5B5Cw3XwI9/oG7tSn85/HKy3X9xHy/8tm/eNXJYHLXHJL/pkwBpFMVVefkw==}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.1.0
+    dev: false
+
+  /@redis/client/1.1.0:
+    resolution: {integrity: sha512-xO9JDIgzsZYDl3EvFhl6LC52DP3q3GCMUer8zHgKV6qSYsq1zB+pZs9+T80VgcRogrlRYhi4ZlfX6A+bHiBAgA==}
+    engines: {node: '>=14'}
+    dependencies:
+      cluster-key-slot: 1.1.0
+      generic-pool: 3.8.2
+      yallist: 4.0.0
+    dev: false
+
+  /@redis/graph/1.0.1_@redis+client@1.1.0:
+    resolution: {integrity: sha512-oDE4myMCJOCVKYMygEMWuriBgqlS5FqdWerikMoJxzmmTUErnTRRgmIDa2VcgytACZMFqpAOWDzops4DOlnkfQ==}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.1.0
+    dev: false
+
+  /@redis/json/1.0.3_@redis+client@1.1.0:
+    resolution: {integrity: sha512-4X0Qv0BzD9Zlb0edkUoau5c1bInWSICqXAGrpwEltkncUwcxJIGEcVryZhLgb0p/3PkKaLIWkjhHRtLe9yiA7Q==}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.1.0
+    dev: false
+
+  /@redis/search/1.0.6_@redis+client@1.1.0:
+    resolution: {integrity: sha512-pP+ZQRis5P21SD6fjyCeLcQdps+LuTzp2wdUbzxEmNhleighDDTD5ck8+cYof+WLec4csZX7ks+BuoMw0RaZrA==}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.1.0
+    dev: false
+
+  /@redis/time-series/1.0.3_@redis+client@1.1.0:
+    resolution: {integrity: sha512-OFp0q4SGrTH0Mruf6oFsHGea58u8vS/iI5+NpYdicaM+7BgqBZH8FFvNZ8rYYLrUO/QRqMq72NpXmxLVNcdmjA==}
+    peerDependencies:
+      '@redis/client': ^1.0.0
+    dependencies:
+      '@redis/client': 1.1.0
     dev: false
 
   /@tootallnate/once/1.1.2:
@@ -375,6 +428,11 @@ packages:
       wrap-ansi: registry.nlark.com/wrap-ansi/7.0.0
     dev: false
 
+  /cluster-key-slot/1.1.0:
+    resolution: {integrity: sha512-2Nii8p3RwAPiFwsnZvukotvow2rIHM+yQ6ZcBXGHdniadkYGZYiGmkHJIbZPIV9nfv7m/U1IPMVVcAhoWFeklw==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /color-convert/1.9.3:
     resolution: {integrity: sha1-u3GFBpDh8TZWfeYp0tVHHe2kweg=, tarball: https://registry.npm.taobao.org/color-convert/download/color-convert-1.9.3.tgz}
     dependencies:
@@ -441,6 +499,10 @@ packages:
   /data-uri-to-buffer/3.0.1:
     resolution: {integrity: sha1-WUuJc5OMW8LDMEZTV4U0GrxPNjY=, registry: http://registry.npm.taobao.org/, tarball: http://registry.npm.taobao.org/data-uri-to-buffer/download/data-uri-to-buffer-3.0.1.tgz}
     engines: {node: '>= 6'}
+
+  /dayjs/1.11.2:
+    resolution: {integrity: sha512-F4LXf1OeU9hrSYRPTTj/6FbO4HTjPKXvEIC1P2kcnFurViINCVk3ZV0xAS3XVx9MkMsXbbqlK6hjseaYbgKEHw==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -794,6 +856,11 @@ packages:
   /functional-red-black-tree/1.0.1:
     resolution: {integrity: sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=, tarball: https://registry.npm.taobao.org/functional-red-black-tree/download/functional-red-black-tree-1.0.1.tgz}
     dev: true
+
+  /generic-pool/3.8.2:
+    resolution: {integrity: sha512-nGToKy6p3PAbYQ7p1UlWl6vSPwfwU6TMSWK7TTu+WUY4ZjyZQGniGGt2oNVvyNSpyZYSB43zMXVLcBm08MTMkg==}
+    engines: {node: '>= 4'}
+    dev: false
 
   /get-intrinsic/1.1.1:
     resolution: {integrity: sha512-kWZrnVM42QCiEA2Ig1bG8zjoIMOgxWwYCEeNdwY6Tv/cOSeGpcoX4pXHfKUxNKVoArnrEr2e9srnAxxGIraS9Q==}
@@ -1508,6 +1575,17 @@ packages:
       string_decoder: 1.3.0
       util-deprecate: 1.0.2
 
+  /redis/4.1.0:
+    resolution: {integrity: sha512-5hvJ8wbzpCCiuN1ges6tx2SAh2XXCY0ayresBmu40/SGusWHFW86TAlIPpbimMX2DFHOX7RN34G2XlPA1Z43zg==}
+    dependencies:
+      '@redis/bloom': 1.0.2_@redis+client@1.1.0
+      '@redis/client': 1.1.0
+      '@redis/graph': 1.0.1_@redis+client@1.1.0
+      '@redis/json': 1.0.3_@redis+client@1.1.0
+      '@redis/search': 1.0.6_@redis+client@1.1.0
+      '@redis/time-series': 1.0.3_@redis+client@1.1.0
+    dev: false
+
   /require-directory/2.1.1:
     resolution: {integrity: sha1-jGStX9MNqxyXbiNE/+f3kqam30I=, tarball: https://registry.npm.taobao.org/require-directory/download/require-directory-2.1.1.tgz}
     engines: {node: '>=0.10.0'}
@@ -1831,7 +1909,7 @@ packages:
     resolution: {integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=, tarball: https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz}
     dev: false
 
-  /typeorm/0.2.38:
+  /typeorm/0.2.38_redis@4.1.0:
     resolution: {integrity: sha1-KvCAeZGfarBM0XAX+fqiyNXNVm8=, registry: http://registry.npm.taobao.org/, tarball: http://registry.npm.taobao.org/typeorm/download/typeorm-0.2.38.tgz}
     hasBin: true
     peerDependencies:
@@ -1892,6 +1970,7 @@ packages:
       glob: 7.2.0
       js-yaml: 4.1.0
       mkdirp: 1.0.4
+      redis: 4.1.0
       reflect-metadata: registry.nlark.com/reflect-metadata/0.1.13
       sha.js: 2.4.11
       tslib: 2.3.1
@@ -2024,11 +2103,10 @@ packages:
     dev: false
 
   /yallist/3.1.1:
-    resolution: {integrity: sha1-27fa+b/YusmrRev2ArjLrQ1dCP0=, tarball: https://registry.npm.taobao.org/yallist/download/yallist-3.1.1.tgz}
+    resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
   /yallist/4.0.0:
-    resolution: {integrity: sha1-m7knkNnA7/7GO+c1GeEaNQGaOnI=, tarball: https://registry.npm.taobao.org/yallist/download/yallist-4.0.0.tgz}
-    dev: true
+    resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
 
   /yargs/16.2.0:
     resolution: {integrity: sha1-HIK/D2tqZur85+8w43b0mhJHf2Y=, registry: http://registry.npm.taobao.org/, tarball: http://registry.npm.taobao.org/yargs/download/yargs-16.2.0.tgz}

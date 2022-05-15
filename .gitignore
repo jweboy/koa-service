@@ -5,3 +5,6 @@ database/
 dist/
 
 apidoc/
+
+nodemon.json
+Dockerfile
