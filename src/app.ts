@@ -8,14 +8,13 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
 import logger from 'koa-logger';
-import http from 'http';
-import { Server, Socket } from 'socket.io';
 import router from './routes';
 import { createDatebase } from './entities';
 import requestIntercept from './middleware/request_intercept';
 import './utils/init-env';
 import tokenInterceptor from './middleware/token_interceptor';
 import { initRedis } from './utils/redis';
+import initSocketServer from './utils/socket';
 
 const app = new Koa();
 const { SERVER_PORT, SERVER_HOST, DB_HOST, DB_PORT } = process.env;
@@ -28,13 +27,7 @@ app
   .use(requestIntercept());
 // .use(tokenInterceptor());
 
-const httpServer = http.createServer(app.callback());
-// const io = new Server(httpServer);
-
-// io.on('connection', (socket: Socket) => {
-//   console.log('socket connection');
-//   /* … */
-// });
+const httpServer = initSocketServer(app);
 
 httpServer.listen(SERVER_PORT, async () => {
   try {
