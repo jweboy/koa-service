@@ -21,4 +21,11 @@ export enum ErrorCode {
   SignedIn,
   NoCookie,
   CookieExpired,
+  AlreadyExists,
 }
+
+export const ErrorMessage = {
+  [ErrorCode.AlreadyExists]: {
+    error: '数据已存在',
+  },
+};

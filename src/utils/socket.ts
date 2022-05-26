@@ -5,20 +5,21 @@ import { onDownloadRepository } from '../controller/deploy/download';
 const initSocketServer = (app) => {
   const httpServer = createServer(app.callback());
   const io = new Server(httpServer, {
-    // @ts-ignore
-    cors: {
-      origin: '*',
-    },
+    // cors: {
+    //   origin: '*',
+    //   methods: ['GET', 'POST'],
+    // },
   });
 
   io.on('connection', (socket: Socket) => {
     console.log('socket connection is ok');
-    socket.on('deploy project', async (data) => {
-      // called for each packet received
-      // const [eventName, payload] = data;
-      // console.log(data);
-      // socket.emit('news', { hello: 'world' });
-      await onDownloadRepository(socket);
+    socket.on('publishData', async (data) => {
+      console.log('get=>', data);
+      await onDownloadRepository(data, socket);
+    });
+
+    socket.on('unpublish', () => {
+      socket.offAny();
     });
   });
 

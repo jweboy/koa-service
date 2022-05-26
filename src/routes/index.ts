@@ -18,6 +18,7 @@ import corpWechatRoutes from './corp_wechat';
 import yuqueRouter from './yuque';
 import juejinRoutes from './juejin';
 import mockRoutes from './mock';
+import projectRoutes from './project';
 
 export default combineRouters([
   directoryRouter,
@@ -32,4 +33,5 @@ export default combineRouters([
   yuqueRouter,
   juejinRoutes,
   mockRoutes,
+  projectRoutes,
 ]);

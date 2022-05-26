@@ -11,12 +11,14 @@ export const spawnAsync = (
     const process = spawn(command, args, restOptions);
     const isEmitFunc = typeof emit === 'function';
 
-    process.stdout.on('data', (data) => {
-      isEmitFunc ? emit(data.toString()) : resolve(data.toString());
+    process.stdout.on('data', (buffer) => {
+      const str = buffer.toString();
+      isEmitFunc ? emit(str) : resolve(str);
     });
 
-    process.stderr.on('data', (data) => {
-      isEmitFunc ? emit(data.toString()) : resolve(data.toString());
+    process.stderr.on('data', (buffer) => {
+      const str = buffer.toString();
+      isEmitFunc ? emit(str) : resolve(str);
     });
 
     process.on('close', (code) => {
