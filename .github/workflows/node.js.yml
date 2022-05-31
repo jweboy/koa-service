@@ -32,10 +32,13 @@ jobs:
           cache: 'yarn'
 
       # 运行打包编译脚本
+      # - name: Install project dependencies
       - run: yarn install --prod --registry=https://registry.npmmirror.com
+
+      # - name: Build with yarn
       - run: yarn run build
 
-      - name: 'Copy file to server'
+      - name: Delpoy files to server and restart node service
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         with:
           host: ${{ secrets.ALIYUN_HOST }}
@@ -43,3 +46,11 @@ jobs:
           key: ${{ secrets.ALIYUN_KEY }}
           first_ssh: |
             ls -al
+          scp: |
+            ./dist => /root/projects/koa_service
+            ./package.json => /root/projects/koa_service
+          last_ssh: |
+            export NVS_HOME="$HOME/.nvs"
+            [ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
+            node -v
+            cd /root/projects/koa_service
