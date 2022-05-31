@@ -36,8 +36,8 @@ jobs:
       - run: yarn run build
 
       - name: 'Copy file to server'
-        uses: appleboy/scp-action@master
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         with:
-          host: ${{secrets.ALIYUN_HOST}}
-          username: ${{secrets.ALIYUN_USER}}
-          key: ${{secrets.ALIYUN_KEY}}
+          host: ${{ secrets.ALIYUN_HOST }}
+          user: ${{ secrets.ALIYUN_USER }}
+          key: ${{ secrets.ALIYUN_KEY }}
