@@ -27,3 +27,6 @@ docker run \
   --publish $port:$port \
   --name $container \
   $aliyun_registry/$image:"$today"
+
+# --build-arg SSH_PRIVATE_KEY=/root/.ssh/authorized.key \
+# docker cp $container:/home/app/* /root/docker/koa_service

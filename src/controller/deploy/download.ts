@@ -1,5 +1,7 @@
 import { Socket } from 'socket.io';
 import { resolve } from 'path';
+import { execSync } from 'child_process';
+import { statSync, mkdirSync } from 'fs';
 import { spawnAsync } from '../../utils/process';
 import Project from '../../entities/project';
 
@@ -43,7 +45,9 @@ export const onDownloadRepository = async (data: Project, socket: Socket) => {
   // 用户的 home 目录（即磁盘根目录）
   const homeDir = process.env.HOME;
   // 用于存放当前需要部署项目的临时目录
-  const project = resolve(homeDir, 'temp', application);
+  // const project = resolve(homeDir, 'temp', application);
+  const project = resolve('/home/test');
+  console.log(homeDir, statSync('/home/app'));
 
   const onEmit = (data) => {
     socket.emit(WRITE_LINE, data);
@@ -51,22 +55,35 @@ export const onDownloadRepository = async (data: Project, socket: Socket) => {
 
   socket.emit(WRITE_LINE, `starting remove ${project}`);
 
-  // 确保运行之前文件目录已被删除
-  await spawnAsync('rm', ['-rf', project]);
-  socket.emit(WRITE_LINE, `the ${project} is removed`);
+  // // 确保运行之前文件目录已被s删除
+  // await spawnAsync('rm', ['-rf', project]);
+  // socket.emit(WRITE_LINE, `the ${project} is removed`);
+  // await mkdirSync(project);
 
-  // 下载 git 仓库代码
-  await spawnAsync('git', ['clone', repo_url, project, '--depth=1', '--verbose', '--progress'], { emit: onEmit });
-  // 在项目中安装依赖包
-  await spawnAsync('pnpm', ['install', '--prod'], {
-    cwd: project,
-    emit: onEmit,
-  });
-  // 在项目中构建编译
-  await spawnAsync('pnpm', ['build'], {
-    cwd: project,
-    emit: onEmit,
-  });
+  try {
+    // 下载 git 仓库代码
+    await spawnAsync('git', ['clone', repo_url, project, '--depth=1', '--verbose', '--progress'], {
+      emit: onEmit,
+      cwd: project,
+    });
+    // 在项目中安装依赖包
+    await spawnAsync('yarn', ['install', '--prod', '--registry=https://registry.npmmirror.com'], {
+      cwd: project,
+      emit: onEmit,
+    });
+
+    // 在项目中构建编译
+    await spawnAsync('yarn', ['build'], {
+      cwd: project,
+      emit: onEmit,
+    });
+
+    await spawnAsync('docker', ['cp', `koa_service:${project}`, '/root/temp'], {
+      emit: onEmit,
+    });
+  } catch (err) {
+    console.log(`spawn execute failed: ${err}`);
+  }
 
   // await copyFilesAsync(socket);
   socket.emit(WRITE_LINE, null);

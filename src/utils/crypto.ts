@@ -2,6 +2,7 @@
 import { webcrypto } from 'crypto';
 import { TextEncoder, TextDecoder } from 'util';
 
+// @ts-ignore
 const { subtle } = webcrypto;
 
 // export const generateRsaKey = async (moduleLength?: number, hash?: 'SHA-256') => {
@@ -36,6 +37,7 @@ async function generateAesKey(length = 256) {
 export async function aesEncrypt(plaintext) {
   const ec = new TextEncoder();
   const key = await generateAesKey();
+  // @ts-ignore
   const iv = webcrypto.getRandomValues(new Uint8Array(16));
 
   const ciphertext = await subtle.encrypt({ name: 'AES-CBC', iv }, key, ec.encode(plaintext));

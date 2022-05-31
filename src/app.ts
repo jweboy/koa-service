@@ -8,6 +8,7 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import cors from '@koa/cors';
 import logger from 'koa-logger';
+import sslify from 'koa-sslify';
 import router from './routes';
 import { createDatebase } from './entities';
 import requestIntercept from './middleware/request_intercept';
@@ -42,9 +43,9 @@ httpServer.listen(SERVER_PORT, async () => {
   // console.log(`🚀 Server running at ${PROTOCOL}://${HOST}:${PORT}/api`);
 });
 
-// app.on('error', (err) => {
-//   console.log('app error=>', err);
-// });
+app.on('error', (err) => {
+  console.log('app error=>', err);
+});
 
 process.on('unhandledRejection', (err) => {
   throw err;

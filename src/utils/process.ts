@@ -21,6 +21,10 @@ export const spawnAsync = (
       isEmitFunc ? emit(str) : resolve(str);
     });
 
+    process.on('error', (err) => {
+      console.log(`spawn failed: ${err}`);
+    });
+
     process.on('close', (code) => {
       const isCrash = code !== null;
       isCrash ? resolve() : reject(code);

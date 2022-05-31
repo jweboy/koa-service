@@ -14,18 +14,18 @@ today=$(date +"%Y%m%d")
 
 # pnpm run build
 
-docker build -t $image:$today .
+docker build -t $image:"$today" .
 
-docker ps -a | grep $container &>/dev/null
+# docker ps -a | grep $container &>/dev/null
 
-if [ $? -eq 0 ]; then
-  docker rm -f $container
-fi
+# if [ $? -eq 0 ]; then
+#   docker rm -f $container
+# fi
 
-pnpm build
+# pnpm build
 
-docker run \
-  --detach \
-  --publish $port:$port \
-  --name $container \
-  $image:$today
+# docker run \
+#   --detach \
+#   --publish $port:$port \
+#   --name $container \
+#   $image:"$today"

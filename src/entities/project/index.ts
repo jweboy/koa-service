@@ -13,7 +13,7 @@ import {
 class Project {
   @Column()
   @Generated('uuid')
-  id: number;
+  id: string;
 
   @PrimaryColumn()
   repo_url: string;
@@ -27,7 +27,7 @@ class Project {
   @UpdateDateColumn()
   update_date: Date;
 
-  @Column({ length: 100 })
+  @Column({ length: 100, default: '' })
   remark: string;
 }
 
