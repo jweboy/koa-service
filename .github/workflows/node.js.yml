@@ -39,5 +39,5 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           host: ${{secrets.ALIYUN_HOST}}
-          user: ${{secrets.ALIYUN_USER}}
+          username: ${{secrets.ALIYUN_USER}}
           key: ${{secrets.ALIYUN_KEY}}
