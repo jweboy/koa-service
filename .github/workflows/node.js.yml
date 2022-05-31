@@ -41,3 +41,5 @@ jobs:
           host: ${{ secrets.ALIYUN_HOST }}
           user: ${{ secrets.ALIYUN_USER }}
           key: ${{ secrets.ALIYUN_KEY }}
+          first_ssh: |
+            ls -al
