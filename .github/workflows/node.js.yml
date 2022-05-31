@@ -38,6 +38,6 @@ jobs:
       - name: 'Copy file to server'
         uses: appleboy/scp-action@master
         with:
-          host: ${{secret.ALIYUN_HOST}}
-          user: ${{secret.ALIYUN_USER}}
-          key: ${{secret.ALIYUN_KEY}}
+          host: ${{secrets.ALIYUN_HOST}}
+          user: ${{secrets.ALIYUN_USER}}
+          key: ${{secrets.ALIYUN_KEY}}
