@@ -1,29 +1,43 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+# workflow 名称
+name: 部署基于 koa 的 node 后端服务
 
+# 触发 workflow 的条件
 on:
   push:
     branches: [action]
-  pull_request:
-    branches: [action]
 
+# workflow 执行的任务
 jobs:
   build:
+    # 指定运行的虚拟机环境
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
+        # 指定 node 镜像
         node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+      # 使用官方 action 获取源码
       - uses: actions/checkout@v3
+
+      # 使用 Node 镜像
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
+
+      # 运行打包编译脚本
       - run: yarn install --prod --registry=https://registry.npmmirror.com
       - run: yarn run build
+
+      - name: 'Copy file to server'
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{secret.ALIYUN_HOST}}
+          user: ${{secret.ALIYUN_USER}}
+          key: ${{secret.ALIYUN_KEY}}
