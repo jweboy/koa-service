@@ -26,4 +26,4 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
       - run: yarn install --prod --registry=https://registry.npmmirror.com
-      - run: yarn run build --if-present
+      - run: yarn run build
